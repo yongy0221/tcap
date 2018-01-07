@@ -23,9 +23,13 @@ Rails.application.configure do
     domain: "localhost:3000",
     authentication: "login",
     enable_starttls_auto: true,
+
     user_name: "timecapsule111217@gmail.com",
     password: "passwordlikelion"
+
   }
+
+  config.active_job.queue_adapter = :sidekiq
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  resources :timecaps
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :userdiaries
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => "/sidekiq"
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]

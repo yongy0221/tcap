@@ -1,6 +1,16 @@
-<h1>UserMailer#email</h1>
 
-<p>
-  Hello, <%= @user.name %>!
-  This is test!
-</p>
+
+<% if @did != 0 %>
+  <% @title = @d_title %>
+  <% @body = @d_body %>
+<% elsif @tid != 0 %>
+  <% @title = @t_title %>
+  <% @body = @t_body %>
+<% end %>
+
+Dear, <%=@user.name%>.<br>s
+
+Now, we reveal you memory.
+
+--------------------------------
+<%=@body%>

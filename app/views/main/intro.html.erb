@@ -1,24 +1,76 @@
+<head>
+  <% if current_user %>
+    <%= link_to "Sign out", signout_path, id: "sign_out", :class => "signoutbutton" %>
+  <% end %>
+    </head>
+    <body id="page">
+        <ul class="cb-slideshow">
+            <li><span>Image 01</span></li>
+            <li><span>Image 02</span></li>
+            <li><span>Image 03</span></li>
+						<li><span>Image 04</span></li>
+						<li><span>Image 05</span></li>
+						<li><span>Image 06</span></li>
+        </ul>
 
-<html>
-  <head>
-    <title>Google Auth Example App</title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <div>
-      <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-        <h2><%= @email %></h2>
-      <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-      <% end %>
-
-    </div>
-    <div>
-    <%= yield %>
-    </div>
-  </body>
+        <div class="container">
+                <p class = "mdtw"> Memory is the Diary
+                  <br>that we all carry about with us. </p>
+                <p class = "ow"> Oscar Wilde</h2>
+        </div>
+        <div class="container">
+          <% if current_user %>
+          <div id = "urmBtn" class="ubutton">User Diary</div>
+            <div id = "urmModal" class="umodal">
+              <div class="umodal-content">
+                <span class = "close"> &times; </span>
+                <%= render "userdiaries/form" %>
+              </div>
+            </div>
+            <div id = "tcBtn" class="tbutton">Time Capsule</div>
+              <div id = "tcModal" class="tmodal">
+                <div class="tmodal-content">
+                  <span class = "close"> &times; </span>
+                  <%= render "timecaps/form" %>
+                </div>
+              </div>
+              <% else %>
+            <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", :class => "button"%>
+          <% end %>
+      </body>
 </html>
+<script>
+// Get the modal
+var urmmodal = document.getElementById('urmModal');
+var tcmodal = document.getElementById('tcModal');
+// Get the button that opens the modal
+var urmbtn = document.getElementById('urmBtn');
+var tcbtn = document.getElementById('tcBtn');
+// Get the <span> element that closes the modal
+var uclose = document.getElementsByClassName("close")[0];
+var tclose = document.getElementsByClassName("close")[1];
+// When the user clicks on the button, open the modal
+urmbtn.onclick = function() {
+    urmmodal.style.display = "block";
+}
+tcbtn.onclick = function() {
+  tcmodal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+uclose.onclick = function() {
+    urmmodal.style.display = "none";
+}
+tclose.onclick = function() {
+  tcmodal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == urmmodal) {
+        urmmodal.style.display = "none";
+    }
+    else if (event.target == tcmodal) {
+      tcmodal.style.display = "none";
+    }
+}
+</script>
